@@ -4,8 +4,10 @@ import { ClassSerializerInterceptor } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const port = process.env.PORT || 3000;
   app.enableShutdownHooks();
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
-  await app.listen(3000);
+  await app.listen(port);
+  console.log({ port, data: new Date() });
 }
 bootstrap();
