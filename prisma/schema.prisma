@@ -9,6 +9,21 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Category {
+  id    Int    @id @default(autoincrement())
+  title String
+  post  Post[]
+}
+
+model Post {
+  id         Int      @id @default(autoincrement())
+  title      String
+  content    String
+  createdAt  String
+  categoryId Int
+  category   Category @relation(fields: [categoryId], references: [id])
 }
