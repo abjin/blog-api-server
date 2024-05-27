@@ -1,3 +1,6 @@
+import { Expose } from 'class-transformer';
+
+@Expose()
 export class CategoryResponseDto {
   id: number;
   title: string;
