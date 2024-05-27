@@ -16,7 +16,7 @@ datasource db {
 model Category {
   id    String    @id 
   title String
-  post  Post[]
+  posts  Post[]
 }
 
 model Post {

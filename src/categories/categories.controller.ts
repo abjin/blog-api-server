@@ -10,8 +10,8 @@ export class CategoriesController {
     return this.categoriesService.getCategories();
   }
 
-  @Get(':id/posts')
-  getCategoryPosts(@Param('id') id: string) {
-    return this.categoriesService.getCategoryPosts(id);
+  @Get(':id')
+  getCategoryWithPosts(@Param('id') id: string) {
+    return this.categoriesService.getCategoryWithPosts(id);
   }
 }
