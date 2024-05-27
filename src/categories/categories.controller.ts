@@ -1,4 +1,4 @@
-import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
 
 @Controller('categories')
@@ -11,7 +11,7 @@ export class CategoriesController {
   }
 
   @Get(':id/posts')
-  getCategoryPosts(@Param('id', ParseIntPipe) id: number) {
+  getCategoryPosts(@Param('id') id: string) {
     return this.categoriesService.getCategoryPosts(id);
   }
 }

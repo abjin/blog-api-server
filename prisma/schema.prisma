@@ -14,7 +14,7 @@ datasource db {
 }
 
 model Category {
-  id    Int    @id @default(autoincrement())
+  id    String    @id 
   title String
   post  Post[]
 }
@@ -24,6 +24,6 @@ model Post {
   title      String
   content    String
   createdAt  String
-  categoryId Int
+  categoryId String
   category   Category @relation(fields: [categoryId], references: [id])
 }

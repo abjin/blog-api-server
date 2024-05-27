@@ -2,7 +2,7 @@ import { Expose } from 'class-transformer';
 
 @Expose()
 export class CategoryResponseDto {
-  id: number;
+  id: string;
   title: string;
 
   constructor(partial: Partial<CategoryResponseDto>) {

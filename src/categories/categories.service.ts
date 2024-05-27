@@ -7,7 +7,7 @@ import { PostResponseDto } from './post.response.dto';
 export class CategoriesService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async getCategory(id: number) {
+  async getCategory(id: string) {
     const category = await this.prisma.category.findUnique({ where: { id } });
     return new CategoryResponseDto(category);
   }
@@ -17,7 +17,7 @@ export class CategoriesService {
     return categories.map((category) => new CategoryResponseDto(category));
   }
 
-  async getCategoryPosts(categoryId: number) {
+  async getCategoryPosts(categoryId: string) {
     const posts = await this.prisma.post.findMany({ where: { categoryId } });
     return posts.map((post) => new PostResponseDto(post));
   }

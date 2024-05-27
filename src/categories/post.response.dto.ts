@@ -6,7 +6,7 @@ export class PostResponseDto {
   title: string;
   content: string;
   createdAt: string;
-  categoryId: number;
+  categoryId: string;
 
   constructor(partial: Partial<PostResponseDto>) {
     Object.assign(this, partial);
