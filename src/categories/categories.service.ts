@@ -7,11 +7,6 @@ import { PostResponseDto } from './post.response.dto';
 export class CategoriesService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async getCategory(id: string) {
-    const category = await this.prisma.category.findUnique({ where: { id } });
-    return new CategoryResponseDto(category);
-  }
-
   async getCategories() {
     const categories = await this.prisma.category.findMany();
     return categories.map((category) => new CategoryResponseDto(category));
