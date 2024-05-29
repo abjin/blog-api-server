@@ -8,4 +8,8 @@ export class PostsService {
   getPostsByCategory(categoryId: string) {
     return this.prismaService.post.findMany({ where: { categoryId } });
   }
+
+  getPostById(id: number) {
+    return this.prismaService.post.findUnique({ where: { id } });
+  }
 }
