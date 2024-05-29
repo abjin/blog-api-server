@@ -1,5 +1,5 @@
 import { Expose, Type } from 'class-transformer';
-import { PostResponseDto } from './post.response.dto';
+import { PostResponseDto } from '../posts/post.response.dto';
 import { Post } from '@prisma/client';
 
 @Expose()
