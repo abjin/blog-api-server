@@ -6,7 +6,7 @@ import { PrismaService } from 'src/db/prisma.service';
 export class PostsCommand {
   constructor(private readonly prismaService: PrismaService) {}
 
-  @Command({ command: 'get:all:post' })
+  @Command({ command: 'get:all:posts' })
   async getAllPosts() {
     const posts = await this.prismaService.post.findMany();
     console.log(posts);
