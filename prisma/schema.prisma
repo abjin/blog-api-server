@@ -14,16 +14,16 @@ datasource db {
 }
 
 model Category {
-  id    String    @id 
+  id    String @id
   title String
-  posts  Post[]
+  posts Post[]
 }
 
 model Post {
   id         Int      @id @default(autoincrement())
   title      String
   content    String
-  createdAt  String
+  createdAt  DateTime @default(now())
   categoryId String
   category   Category @relation(fields: [categoryId], references: [id])
 }
