@@ -12,4 +12,8 @@ export class PostsService {
   getPostById(id: number) {
     return this.prismaService.post.findUnique({ where: { id } });
   }
+
+  createPost(data: { categoryId: string; title: string; content: string }) {
+    return this.prismaService.post.create({ data });
+  }
 }

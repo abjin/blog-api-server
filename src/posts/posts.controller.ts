@@ -1,6 +1,15 @@
-import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { GetPostsRequestQueryDto } from './get-posts-request-query.dto';
+import { CreatePostRequestBodyDto } from './create-post-reqest-query.dto';
 
 @Controller('posts')
 export class PostsController {
@@ -14,5 +23,10 @@ export class PostsController {
   @Get(':id')
   getPost(@Param('id', ParseIntPipe) id: number) {
     return this.postsService.getPostById(id);
+  }
+
+  @Post()
+  CreatePost(@Body() dto: CreatePostRequestBodyDto) {
+    return this.postsService.createPost(dto);
   }
 }
