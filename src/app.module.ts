@@ -4,9 +4,16 @@ import { CategoriesModule } from './categories/categories.module';
 import { DbModule } from './db/db.module';
 import { PostsModule } from './posts/posts.module';
 import { CommandModule } from 'nestjs-command';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [CommandModule, CategoriesModule, DbModule, PostsModule],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    CommandModule,
+    CategoriesModule,
+    DbModule,
+    PostsModule,
+  ],
   controllers: [AppController],
 })
 export class AppModule {}
