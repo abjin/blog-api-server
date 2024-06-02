@@ -60,6 +60,7 @@ prisma/development.db
 prisma/migrations/*
 *.sql
 **/*.db-journal
+**/*.db
 
 # Start Shell
 start.sh

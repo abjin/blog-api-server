@@ -10,7 +10,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = "file:./db-path.db"
+  url      = env("DATABASE_URL")
 }
 
 model Category {
