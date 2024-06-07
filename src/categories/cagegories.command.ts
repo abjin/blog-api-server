@@ -29,3 +29,24 @@ export class CategoriesCommand {
     console.log(categories);
   }
 }
+{
+  {
+    const data = [
+      {
+        id: 'INTRO',
+        title: '회사소개',
+      },
+      {
+        id: 'EXAMPLE',
+        title: '구축사례',
+      },
+      {
+        id: 'NOTICE',
+        title: '공지사항',
+      },
+    ];
+
+    const result = data.map((i) => i.id).join('| ');
+    console.log(result);
+  }
+}
