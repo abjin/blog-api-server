@@ -12,6 +12,7 @@
     "start:dev": "NODE_ENV=development DATABASE_URL=file:./development.db nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
+    "command": "npx nestjs-command",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "prisma:generate": "npx prisma generate"
   },
