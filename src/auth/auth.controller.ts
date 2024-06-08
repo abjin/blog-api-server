@@ -15,7 +15,7 @@ export class AuthController {
     @Res({ passthrough: true }) res: Response,
   ): Promise<CreateAccountResponseDto> {
     const localAccount = await this.authService.signUp(username, password);
-    this.authService.setWebToken(res, localAccount.username);
+    await this.authService.setWebToken(res, localAccount.username);
     return new CreateAccountResponseDto(localAccount);
   }
 
