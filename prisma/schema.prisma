@@ -27,3 +27,9 @@ model Post {
   categoryId String
   category   Category @relation(fields: [categoryId], references: [id])
 }
+
+model LocalAccount {
+  username String    @unique
+  password String
+  salt     String
+}
