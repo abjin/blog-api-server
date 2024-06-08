@@ -3,13 +3,19 @@ import { PrismaService } from 'src/db/prisma.service';
 import * as crypto from 'crypto';
 import { JwtService } from '@nestjs/jwt';
 import { Response } from 'express';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private jwtService: JwtService,
+    private readonly jwtService: JwtService,
+    private readonly configService: ConfigService,
     private readonly prismaService: PrismaService,
   ) {}
+
+  private readonly cookieOption = {
+    domain: this.configService.getOrThrow('COOKIE_DOMAIN'),
+  };
 
   public async signUp(username: string, password: string) {
     const salt = crypto.randomBytes(16).toString('hex');
@@ -37,7 +43,7 @@ export class AuthService {
 
   public async setWebToken(res: Response, username: string) {
     const token = await this.jwtService.signAsync({ username });
-    res.cookie('token', token, { domain: 'localhost' });
+    res.cookie('token', token, this.cookieOption);
   }
 
   private hashPassword(password: string, salt: string) {
