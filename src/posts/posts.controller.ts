@@ -8,8 +8,10 @@ import {
   Query,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
-import { GetPostsRequestQueryDto } from './get-posts-request-query.dto';
-import { CreatePostRequestBodyDto } from './create-post-reqest-query.dto';
+import {
+  GetPostsRequestQueryDto,
+  CreatePostRequestBodyDto,
+} from './posts.request.dto';
 
 @Controller('posts')
 export class PostsController {

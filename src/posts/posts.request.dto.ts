@@ -1,7 +1,5 @@
-import { Expose } from 'class-transformer';
 import { IsString } from 'class-validator';
 
-@Expose()
 export class CreatePostRequestBodyDto {
   @IsString()
   categoryId: string;
@@ -11,4 +9,9 @@ export class CreatePostRequestBodyDto {
 
   @IsString()
   content: string;
+}
+
+export class GetPostsRequestQueryDto {
+  @IsString()
+  categoryId: string;
 }
