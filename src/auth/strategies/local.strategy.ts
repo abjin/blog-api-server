@@ -7,7 +7,8 @@ import { AuthService } from '../auth.service';
 export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
   @Inject() private readonly authService: AuthService;
 
-  validate(username: string, password: string) {
-    return this.authService.signIn(username, password);
+  async validate(username: string, password: string) {
+    const account = await this.authService.signIn(username, password);
+    return { username: account.username };
   }
 }
