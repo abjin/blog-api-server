@@ -11,6 +11,7 @@
     "start": "node dist/main",
     "start:dev": "NODE_ENV=development DATABASE_URL=file:./development.db nest start --watch",
     "migrate": "npx prisma migrate dev",
+    "migrate:dev": "DATABASE_URL=file:./development.db npx prisma migrate dev",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "command": "npx nestjs-command",
