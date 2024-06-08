@@ -7,10 +7,12 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
-    "postbuild": "prisma migrate dev",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "node dist/main",
     "start:dev": "NODE_ENV=development DATABASE_URL=file:./development.db nest start --watch",
+    "migrate:dev": "DATABASE_URL=file:./development.db npx prisma migrate dev",
+    "migrate:test": "DATABASE_URL=file:./test.db npx prisma migrate dev",
+    "migrate:prod": "DATABASE_URL=file:./production.db npx prisma migrate dev",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "command": "npx nestjs-command",
