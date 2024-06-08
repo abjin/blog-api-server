@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/db/prisma.service';
 import * as crypto from 'crypto';
 import { JwtService } from '@nestjs/jwt';
@@ -18,24 +18,24 @@ export class AuthService {
   };
 
   public async signUp(username: string, password: string) {
+    await this.validateUniqueUsername(username);
+
     const salt = crypto.randomBytes(16).toString('hex');
     const hashedPassword = await this.hashPassword(password, salt);
-    const localAccount = await this.prismaService.localAccount.create({
+    return this.prismaService.localAccount.create({
       data: {
         username,
         password: hashedPassword,
         salt,
       },
     });
-
-    return localAccount;
   }
 
   public async signIn(username: string, password: string) {
-    const localAccount = await this.prismaService.localAccount.findUnique({
-      where: { username },
-    });
-    if (!localAccount) return null;
+    const localAccount =
+      await this.prismaService.localAccount.findUniqueOrThrow({
+        where: { username },
+      });
 
     const hashedPassword = await this.hashPassword(password, localAccount.salt);
     return hashedPassword !== localAccount.password ? null : localAccount;
@@ -44,6 +44,13 @@ export class AuthService {
   public async setWebToken(res: Response, username: string) {
     const token = await this.jwtService.signAsync({ username });
     res.cookie('token', token, this.cookieOption);
+  }
+
+  private async validateUniqueUsername(username: string) {
+    const existAccount = await this.prismaService.localAccount.findUnique({
+      where: { username },
+    });
+    if (existAccount) throw new BadRequestException();
   }
 
   private hashPassword(password: string, salt: string) {
