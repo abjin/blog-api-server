@@ -16,4 +16,4 @@ async function bootstrap() {
 
   console.log({ port, data: new Date() });
 }
-bootstrap();
+bootstrap().catch(console.log);
