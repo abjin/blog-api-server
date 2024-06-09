@@ -6,12 +6,14 @@ import {
   ParseIntPipe,
   Post,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import {
   GetPostsRequestQueryDto,
   CreatePostRequestBodyDto,
 } from './posts.request.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('posts')
 export class PostsController {
@@ -27,6 +29,7 @@ export class PostsController {
     return this.postsService.getPostById(id);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Post()
   createPost(@Body() dto: CreatePostRequestBodyDto) {
     return this.postsService.createPost(dto);
