@@ -9,7 +9,7 @@
     "build": "nest build",
     "postbuild": "npx prisma migrate dev --name 'init'",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "node dist/main",
+    "start": "node dist/src/main",
     "start:dev": "NODE_ENV=development DATABASE_URL=file:./development.db nest start --watch",
     "migrate": "npx prisma migrate dev",
     "migrate:dev": "DATABASE_URL=file:./development.db npx prisma migrate dev",
