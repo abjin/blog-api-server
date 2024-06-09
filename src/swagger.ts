@@ -2,6 +2,7 @@ import { INestApplication } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as expressBasicAuth from 'express-basic-auth';
+import { name as packageName } from '../package.json';
 
 export function useSwagger(app: INestApplication) {
   const configService = app.get(ConfigService);
@@ -17,8 +18,8 @@ export function useSwagger(app: INestApplication) {
   );
 
   const config = new DocumentBuilder()
-    .setTitle('kg-telecome api sever')
-    .setDescription('The kg-telecome API description')
+    .setTitle(`${packageName}`)
+    .setDescription(`${packageName} description`)
     .setVersion('1.0')
     .addTag('API')
     .build();
