@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -33,5 +34,11 @@ export class PostsController {
   @Post()
   createPost(@Body() dto: CreatePostRequestBodyDto) {
     return this.postsService.createPost(dto);
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Delete()
+  deletePost(@Param('id', ParseIntPipe) id: number) {
+    return this.postsService.deletePostById(id);
   }
 }

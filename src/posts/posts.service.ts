@@ -16,4 +16,8 @@ export class PostsService {
   createPost(data: { categoryId: string; title: string; content: string }) {
     return this.prismaService.post.create({ data });
   }
+
+  deletePostById(id: number) {
+    return this.prismaService.post.delete({ where: { id } });
+  }
 }
