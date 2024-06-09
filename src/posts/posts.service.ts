@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Post } from '@prisma/client';
 import { PrismaService } from 'src/db/prisma.service';
 
 @Injectable()
@@ -19,5 +20,9 @@ export class PostsService {
 
   deletePostById(id: number) {
     return this.prismaService.post.delete({ where: { id } });
+  }
+
+  patchPost(id: number, data: Partial<Post>) {
+    return this.prismaService.post.update({ where: { id }, data });
   }
 }

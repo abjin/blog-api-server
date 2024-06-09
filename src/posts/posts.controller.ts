@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   ParseIntPipe,
+  Patch,
   Post,
   Query,
   UseGuards,
@@ -13,6 +14,7 @@ import { PostsService } from './posts.service';
 import {
   GetPostsRequestQueryDto,
   CreatePostRequestBodyDto,
+  PatchPostRequestBodyDto,
 } from './posts.request.dto';
 import { AuthGuard } from '@nestjs/passport';
 
@@ -40,5 +42,19 @@ export class PostsController {
   @Delete(':id')
   deletePost(@Param('id', ParseIntPipe) id: number) {
     return this.postsService.deletePostById(id);
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Patch(':id')
+  patchPost(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: PatchPostRequestBodyDto,
+  ) {
+    return this.postsService.patchPost(id, {
+      id: dto.id,
+      categoryId: dto.categoryId,
+      content: dto.content,
+      title: dto.title,
+    });
   }
 }
