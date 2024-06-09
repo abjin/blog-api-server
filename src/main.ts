@@ -14,7 +14,7 @@ async function bootstrap() {
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
   app.useGlobalPipes(new ValidationPipe());
   app.enableShutdownHooks();
-  useSwagger(app);
+  configService.getOrThrow('NODE_ENV') !== 'production' && useSwagger(app);
 
   await app.listen(port);
   return { port, data: new Date() };
