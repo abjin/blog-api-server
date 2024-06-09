@@ -7,10 +7,7 @@ import { PrismaClientExceptionFilter } from 'src/db/prisma-exception.filter';
 @Module({
   providers: [
     PrismaService,
-    {
-      provide: APP_FILTER,
-      useClass: PrismaClientExceptionFilter,
-    },
+    { provide: APP_FILTER, useClass: PrismaClientExceptionFilter },
   ],
   exports: [PrismaService],
 })
