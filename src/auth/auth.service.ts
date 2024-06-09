@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/db/prisma.service';
 import * as crypto from 'crypto';
 import { JwtService } from '@nestjs/jwt';
@@ -18,8 +18,6 @@ export class AuthService {
   };
 
   public async signUp(username: string, password: string) {
-    await this.validateUniqueUsername(username);
-
     const salt = crypto.randomBytes(16).toString('hex');
     const hashedPassword = await this.hashPassword(password, salt);
     return this.prismaService.localAccount.create({
@@ -44,13 +42,6 @@ export class AuthService {
   public async setWebToken(res: Response, username: string) {
     const token = await this.jwtService.signAsync({ username });
     res.cookie('token', token, this.cookieOption);
-  }
-
-  private async validateUniqueUsername(username: string) {
-    const existAccount = await this.prismaService.localAccount.findUnique({
-      where: { username },
-    });
-    if (existAccount) throw new BadRequestException();
   }
 
   private hashPassword(password: string, salt: string) {
