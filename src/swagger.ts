@@ -4,10 +4,10 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as expressBasicAuth from 'express-basic-auth';
 import { name as packageName } from '../package.json';
 
-export function useSwagger(app: INestApplication) {
+export function useSwagger(app: INestApplication, path = 'api-docs') {
   const configService = app.get(ConfigService);
   app.use(
-    ['/api-docs'],
+    [`/${path}`],
     expressBasicAuth({
       challenge: true,
       users: {
@@ -24,7 +24,7 @@ export function useSwagger(app: INestApplication) {
     .addTag('API')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api-docs', app, document, {
+  SwaggerModule.setup(`/${path}`, app, document, {
     swaggerOptions: { defaultModelsExpandDepth: -1 },
   });
 }
