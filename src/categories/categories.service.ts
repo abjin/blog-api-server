@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/db/prisma.service';
 import { CategoryResponseDto } from './categories.response.dto';
+import { Category } from '@prisma/client';
 
 @Injectable()
 export class CategoriesService {
@@ -27,5 +28,9 @@ export class CategoriesService {
     return this.prisma.category.delete({
       where: { id: categoryId },
     });
+  }
+
+  patchCategory(id: string, data: Partial<Category>) {
+    return this.prisma.category.update({ where: { id }, data });
   }
 }
