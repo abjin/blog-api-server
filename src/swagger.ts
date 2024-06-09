@@ -21,7 +21,6 @@ export function useSwagger(app: INestApplication, path = 'api-docs') {
     .setTitle(`${packageName}`)
     .setDescription(`${packageName} description`)
     .setVersion('1.0')
-    .addTag('API')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup(`/${path}`, app, document, {
