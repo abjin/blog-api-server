@@ -16,6 +16,11 @@ export class PrismaClientExceptionFilter extends BaseExceptionFilter {
         response.status(status).json({ statusCode: status, message });
         break;
       }
+      case 'P2025': {
+        const status = HttpStatus.NOT_FOUND;
+        response.status(status).json({ statusCode: status, message });
+        break;
+      }
       default:
         super.catch(exception, host);
         break;

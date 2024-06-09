@@ -22,4 +22,10 @@ export class CategoriesService {
     });
     return new CategoryResponseDto(category);
   }
+
+  deleteCategory(categoryId: string) {
+    return this.prisma.category.delete({
+      where: { id: categoryId },
+    });
+  }
 }
