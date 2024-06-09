@@ -26,6 +26,7 @@ export class CategoriesController {
     return this.categoriesService.getCategories();
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   deleteCategory(@Param('id') id: string) {
     return this.categoriesService.deleteCategory(id);
