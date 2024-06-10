@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { InquiriesService } from './inquiries.service';
 import { InquiriesController } from './inquiries.controller';
-import { EmailModule } from 'yes/email';
+import { EmailModule } from '@libs/email';
 
 @Module({
   imports: [EmailModule],

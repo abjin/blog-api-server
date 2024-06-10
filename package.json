@@ -87,7 +87,7 @@
       "<rootDir>/libs/"
     ],
     "moduleNameMapper": {
-      "^yes/email(|/.*)$": "<rootDir>/libs/email/src/$1"
+      "^@libs/email(|/.*)$": "<rootDir>/libs/email/src/$1"
     }
   }
 }

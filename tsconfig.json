@@ -19,12 +19,8 @@
     "noFallthroughCasesInSwitch": false,
     "resolveJsonModule": true,
     "paths": {
-      "yes/email": [
-        "libs/email/src"
-      ],
-      "yes/email/*": [
-        "libs/email/src/*"
-      ]
+      "@libs/email": ["libs/email/src"],
+      "@libs/email/*": ["libs/email/src/*"]
     }
   }
 }
