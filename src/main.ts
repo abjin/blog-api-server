@@ -16,7 +16,19 @@ async function bootstrap() {
   app.enableShutdownHooks();
   configService.getOrThrow('NODE_ENV') !== 'production' && useSwagger(app);
 
+  const origins: string[] = getOriginWhitelist();
+  app.enableCors({
+    origin: origins,
+    credentials: true,
+    methods: ['POST', 'PUT', 'GET', 'PATCH', 'DELETE'],
+    optionsSuccessStatus: 200,
+  });
+
   await app.listen(port);
   return { port, data: new Date() };
 }
 bootstrap().then(console.log).catch(console.log);
+
+function getOriginWhitelist(): string[] {
+  return ['https://localhost:5173', 'http://localhost:5173'];
+}
