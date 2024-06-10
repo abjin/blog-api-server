@@ -13,6 +13,11 @@ export class CreatePostRequestBodyDto {
   @ApiProperty({ description: '게시물 내용' })
   @IsString()
   content: string;
+
+  @ApiProperty({ description: '대표 이미지', required: false })
+  @IsString()
+  @IsOptional()
+  image: string;
 }
 
 export class GetPostsRequestQueryDto {
@@ -41,4 +46,9 @@ export class PatchPostRequestBodyDto {
   @IsOptional()
   @IsString()
   content?: string;
+
+  @ApiProperty({ description: '대표 이미지', required: false })
+  @IsString()
+  @IsOptional()
+  image: string;
 }

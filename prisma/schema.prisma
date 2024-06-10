@@ -22,6 +22,7 @@ model Category {
 model Post {
   id         Int      @id @default(autoincrement())
   title      String
+  image      String?
   content    String
   createdAt  DateTime @default(now())
   categoryId String
