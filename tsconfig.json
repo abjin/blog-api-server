@@ -17,6 +17,14 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "paths": {
+      "yes/email": [
+        "libs/email/src"
+      ],
+      "yes/email/*": [
+        "libs/email/src/*"
+      ]
+    }
   }
 }

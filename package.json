@@ -8,7 +8,7 @@
   "scripts": {
     "build": "nest build",
     "postbuild": "npx prisma migrate dev --name 'init'",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\" \"libs/**/*.ts\"",
     "start": "node dist/src/main",
     "start:dev": "NODE_ENV=development DATABASE_URL=file:./development.db nest start --watch",
     "migrate": "npx prisma migrate dev",
@@ -72,7 +72,7 @@
       "json",
       "ts"
     ],
-    "rootDir": "src",
+    "rootDir": ".",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
@@ -80,7 +80,14 @@
     "collectCoverageFrom": [
       "**/*.(t|j)s"
     ],
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "coverageDirectory": "./coverage",
+    "testEnvironment": "node",
+    "roots": [
+      "<rootDir>/src/",
+      "<rootDir>/libs/"
+    ],
+    "moduleNameMapper": {
+      "^yes/email(|/.*)$": "<rootDir>/libs/email/src/$1"
+    }
   }
 }
