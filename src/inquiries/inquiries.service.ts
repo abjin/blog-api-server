@@ -14,7 +14,7 @@ export class InquiriesService {
 
   async createInquiry(dto: PostInquiryRequestDto) {
     await this.emailService.sendEmail({
-      to: this.configService.get('GEMAIL_USER'),
+      to: this.configService.get('GMAIL_USERNAME'),
       subject: '고객 문의',
       html: this.createInquiryHtmlFromJson(dto),
     });

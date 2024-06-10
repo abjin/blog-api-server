@@ -14,8 +14,8 @@ import { name as packageName } from '../../../package.json';
           host: 'smtp.gmail.com',
           port: 587,
           auth: {
-            user: configService.get('GEMAIL_USER'),
-            pass: configService.get('GEMAIL_PASS'),
+            user: configService.get('GMAIL_USERNAME'),
+            pass: configService.get('GMAIL_PASSWORD'),
           },
         },
         defaults: { from: `"${packageName}" <${packageName}@gmail.com>` },
