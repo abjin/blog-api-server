@@ -29,7 +29,17 @@ model Post {
 }
 
 model LocalAccount {
-  username String    @unique
+  username String @unique
   password String
   salt     String
+}
+
+model Inquiry {
+  id        Int      @id @default(autoincrement())
+  name      String
+  staffName String?
+  phone     String
+  email     String?
+  content   String
+  createdAt DateTime
 }
