@@ -28,7 +28,7 @@ export class PostsController {
   @ApiQuery({ type: GetPostsRequestQueryDto })
   @Get()
   getPosts(@Query() query: GetPostsRequestQueryDto) {
-    return this.postsService.getPostsByCategory(query.categoryId);
+    return this.postsService.getPostsByCategory(query);
   }
 
   @ApiOperation({ summary: '단일 게시물 조회' })

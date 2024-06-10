@@ -12,7 +12,12 @@ async function bootstrap() {
 
   app.use(cookieParser());
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
-  app.useGlobalPipes(new ValidationPipe({ transform: true }));
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      transformOptions: { enableImplicitConversion: true },
+    }),
+  );
   app.enableShutdownHooks();
   configService.getOrThrow('NODE_ENV') !== 'production' && useSwagger(app);
 

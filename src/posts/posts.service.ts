@@ -1,13 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { Post } from '@prisma/client';
 import { PrismaService } from 'src/db/prisma.service';
+import { GetPostsRequestQueryDto } from './posts.request.dto';
 
 @Injectable()
 export class PostsService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  getPostsByCategory(categoryId: string) {
-    return this.prismaService.post.findMany({ where: { categoryId } });
+  getPostsByCategory({ categoryId, take, cursor }: GetPostsRequestQueryDto) {
+    return this.prismaService.post.findMany({
+      where: { categoryId },
+      take,
+      ...(cursor && { cursor: { id: cursor }, skip: 1 }),
+    });
   }
 
   getPostById(id: number) {

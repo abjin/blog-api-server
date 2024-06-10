@@ -24,6 +24,16 @@ export class GetPostsRequestQueryDto {
   @ApiProperty({ description: '게시판 고유아이디' })
   @IsString()
   categoryId: string;
+
+  @ApiProperty({ description: '페이지 아이템 개수' })
+  @IsNumber()
+  @IsOptional()
+  take?: number;
+
+  @ApiProperty({ description: '페이지네이션 커서' })
+  @IsNumber()
+  @IsOptional()
+  cursor?: number;
 }
 
 export class PatchPostRequestBodyDto {
