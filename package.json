@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
-    "postbuild": "if [ $NODE_ENV == test ]; then npx prisma migrate dev --name 'init' && npx nestjs-command add:seed; fi",
+    "postbuild": "if [ $NEED_TO_MIGRATE == true ]; then npx prisma migrate dev --name 'init' && npx nestjs-command add:seed; fi",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\" \"libs/**/*.ts\"",
     "start": "node dist/main",
     "start:dev": "NODE_ENV=development DATABASE_URL=file:./development.db nest start --watch",
