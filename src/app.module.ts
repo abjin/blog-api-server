@@ -7,6 +7,7 @@ import { CommandModule } from 'nestjs-command';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { InquiriesModule } from './inquiries/inquiries.module';
+import { AppCommand } from './app.command';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { InquiriesModule } from './inquiries/inquiries.module';
     AuthModule,
     InquiriesModule,
   ],
+  providers: [AppCommand],
   controllers: [AppController],
 })
 export class AppModule {}
