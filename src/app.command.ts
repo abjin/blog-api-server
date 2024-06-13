@@ -49,7 +49,10 @@ const introPosts = [
     title: '회사소개',
     image:
       'https://t3.ftcdn.net/jpg/03/22/77/08/360_F_322770818_s4h1v5sg2qI8OSSNOc3wCK82Zfqx5TBn.jpg',
-    content: `### [회사명] 소개
+    content: `
+<p><span class="ql-size-huge">제목 1</span></p><p><br></p><p><span class="ql-size-large">제목 2</span></p><p><br></p><p><br></p><p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p><p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p><p><br></p><p><br></p><p class="ql-align-center"><img src="https://firebasestorage.googleapis.com/v0/b/kg-telecom.appspot.com/o/image%2F1716786727161?alt=media&amp;token=d1582393-f807-4051-bcdb-64106d9c1ae1" width="82" style=""></p><p><br></p><p><br></p><p><span class="ql-size-small">small</span></p><p><br></p><p><br></p><p><br></p>
+
+### [회사명] 소개
 
 [회사명]은 최첨단 기술과 탁월한 고객 서비스를 통해 업계를 선도하는 글로벌 통신 회사입니다. 저희 회사는 고객의 다양한 통신 요구를 충족시키기 위해 혁신적인 솔루션과 광범위한 서비스를 제공하고 있습니다. 5G 네트워크, 초고속 인터넷, 안정적인 음성 통화 및 데이터 서비스를 포함하여 고객이 필요로 하는 모든 통신 서비스를 하나의 플랫폼에서 제공합니다.
 
