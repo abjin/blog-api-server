@@ -9,6 +9,7 @@ import {
 
 export class PostInquiryRequestDto {
   @ApiProperty({ description: '유저 이름' })
+  @IsOptional()
   @IsString()
   name: string;
 
