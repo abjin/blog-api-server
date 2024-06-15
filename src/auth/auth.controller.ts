@@ -46,10 +46,11 @@ export class AuthController {
   @ApiBody({ type: LoginRequestBodyDto })
   @UseGuards(AuthGuard('local'))
   @Post('local-login')
-  postAdminLogin(
+  async postAdminLogin(
     @Req() req: Request & { user: any },
     @Res({ passthrough: true }) res: Response,
-  ): Promise<void> {
-    return this.authService.setWebToken(res, req.user.username);
+  ): Promise<{ user: { username: string } }> {
+    await this.authService.setWebToken(res, req.user.username);
+    return req.user;
   }
 }
