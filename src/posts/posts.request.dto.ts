@@ -62,3 +62,9 @@ export class PatchPostRequestBodyDto {
   @IsOptional()
   image: string;
 }
+
+export class GetPostsSignedUrlRequestQueryDto {
+  @ApiProperty({ description: '파일 이름' })
+  @IsString()
+  fileName: string;
+}

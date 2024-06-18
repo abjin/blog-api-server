@@ -2,10 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { Post } from '@prisma/client';
 import { PrismaService } from 'src/db/prisma.service';
 import { GetPostsRequestQueryDto } from './posts.request.dto';
+import { GoogleCloudService } from '@libs/google-cloud';
 
 @Injectable()
 export class PostsService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly googleCloudService: GoogleCloudService,
+  ) {}
 
   getPostsByCategory({ categoryId, take, cursor }: GetPostsRequestQueryDto) {
     return this.prismaService.post.findMany({
@@ -29,5 +33,14 @@ export class PostsService {
 
   patchPost(id: number, data: Partial<Post>) {
     return this.prismaService.post.update({ where: { id }, data });
+  }
+
+  getPostsSignedUrlRequestQueryDto(fileName: string) {
+    const filePath = this.getPostsImageFilePath(fileName);
+    return this.googleCloudService.getSignedUrl(filePath);
+  }
+
+  private getPostsImageFilePath(fileName: string) {
+    return `posts/${fileName}`;
   }
 }
