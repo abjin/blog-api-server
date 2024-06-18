@@ -5,9 +5,10 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class GoogleCloudService {
-  private bucket: Bucket;
-  private storage: Storage;
-  private bucketName: string;
+  private readonly bucket: Bucket;
+  private readonly storage: Storage;
+  private readonly bucketName: string;
+  private readonly publicImageBaseUrl = 'https://storage.googleapis.com';
 
   constructor(private readonly configService: ConfigService) {
     this.storage = new Storage({
@@ -31,7 +32,11 @@ export class GoogleCloudService {
       expires: Date.now() + 1000 * 60 * 60,
       action: 'write',
     });
-    const publicUrl = `https://storage.cloud.google.com/${this.bucketName}/${fileName}`;
+    const publicUrl = `${this.publicImageBaseUrl}/${this.bucketName}/${fileName}`;
+    console.log({
+      signedUrl: urls[0],
+      publicUrl: publicUrl,
+    });
     return {
       signedUrl: urls[0],
       publicUrl: publicUrl,
