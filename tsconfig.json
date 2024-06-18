@@ -20,7 +20,9 @@
     "resolveJsonModule": true,
     "paths": {
       "@libs/email": ["libs/email/src"],
-      "@libs/email/*": ["libs/email/src/*"]
+      "@libs/email/*": ["libs/email/src/*"],
+      "@libs/google-cloud": ["libs/google-cloud/src"],
+      "@libs/google-cloud/*": ["libs/google-cloud/src/*"]
     }
   }
 }

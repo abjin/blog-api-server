@@ -20,6 +20,7 @@
     "prisma:generate": "npx prisma generate"
   },
   "dependencies": {
+    "@google-cloud/storage": "^7.11.2",
     "@nestjs-modules/mailer": "^2.0.2",
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^3.2.2",
@@ -90,7 +91,8 @@
       "<rootDir>/libs/"
     ],
     "moduleNameMapper": {
-      "^@libs/email(|/.*)$": "<rootDir>/libs/email/src/$1"
+      "^@libs/email(|/.*)$": "<rootDir>/libs/email/src/$1",
+      "^@libs/google-cloud(|/.*)$": "<rootDir>/libs/google-cloud/src/$1"
     }
   }
 }

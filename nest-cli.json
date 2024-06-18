@@ -15,6 +15,15 @@
       "compilerOptions": {
         "tsConfigPath": "libs/email/tsconfig.lib.json"
       }
+    },
+    "google-cloud": {
+      "type": "library",
+      "root": "libs/google-cloud",
+      "entryFile": "index",
+      "sourceRoot": "libs/google-cloud/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/google-cloud/tsconfig.lib.json"
+      }
     }
   }
 }
