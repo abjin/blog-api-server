@@ -29,10 +29,8 @@ export class PostsController {
   @ApiQuery({ type: GetPostsSignedUrlRequestQueryDto })
   @UseGuards(AuthGuard('jwt'))
   @Get('signed-url')
-  getPostsSignedUrlRequestQueryDto(
-    @Query() { fileName }: GetPostsSignedUrlRequestQueryDto,
-  ) {
-    return this.postsService.getPostsSignedUrlRequestQueryDto(fileName);
+  getPostsSignedUrl(@Query() { fileName }: GetPostsSignedUrlRequestQueryDto) {
+    return this.postsService.getPostsSignedUrl(fileName);
   }
 
   @ApiOperation({ summary: '게시판 게시물 조회' })

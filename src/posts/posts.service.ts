@@ -35,7 +35,7 @@ export class PostsService {
     return this.prismaService.post.update({ where: { id }, data });
   }
 
-  getPostsSignedUrlRequestQueryDto(fileName: string) {
+  getPostsSignedUrl(fileName: string) {
     const filePath = this.getPostsImageFilePath(fileName);
     return this.googleCloudService.getSignedUrl(filePath);
   }
