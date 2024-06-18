@@ -33,10 +33,7 @@ export class GoogleCloudService {
       action: 'write',
     });
     const publicUrl = `${this.publicImageBaseUrl}/${this.bucketName}/${fileName}`;
-    console.log({
-      signedUrl: urls[0],
-      publicUrl: publicUrl,
-    });
+
     return {
       signedUrl: urls[0],
       publicUrl: publicUrl,
