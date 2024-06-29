@@ -40,12 +40,14 @@ export class InquiriesService {
   public async getInquiries({
     take = 100,
     cursor,
+    orderby,
   }: {
     take?: number;
     cursor?: number;
+    orderby?: 'asc' | 'desc';
   }) {
     return this.prismaService.inquiry.findMany({
-      orderBy: { id: 'desc' },
+      orderBy: { id: orderby },
       take,
       ...(cursor && { cursor: { id: cursor }, skip: 1 }),
     });

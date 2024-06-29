@@ -24,6 +24,7 @@ export class InquiriesController {
   @UseGuards(AuthGuard('jwt'))
   @Get()
   getInquiries(@Query() dto: GetInquiriesRequestQueryDto) {
+    console.log(dto);
     return this.inquiriesService.getInquiries(dto);
   }
 }

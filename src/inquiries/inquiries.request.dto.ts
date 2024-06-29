@@ -47,4 +47,8 @@ export class GetInquiriesRequestQueryDto {
   @IsNumber()
   @IsOptional()
   cursor?: number;
+
+  @ApiProperty({ description: '정렬 기준' })
+  @IsOptional()
+  orderby?: 'asc' | 'desc' = 'desc';
 }
