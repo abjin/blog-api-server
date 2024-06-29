@@ -2,6 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   IsDate,
   IsEmail,
+  IsNumber,
   IsOptional,
   IsPhoneNumber,
   IsString,
@@ -34,4 +35,16 @@ export class PostInquiryRequestDto {
   @ApiProperty({ description: '문의 날짜', required: false })
   @IsDate()
   createdAt = new Date();
+}
+
+export class GetInquiriesRequestQueryDto {
+  @ApiProperty({ description: '페이지 아이템 개수' })
+  @IsNumber()
+  @IsOptional()
+  take?: number;
+
+  @ApiProperty({ description: '페이지네이션 커서' })
+  @IsNumber()
+  @IsOptional()
+  cursor?: number;
 }

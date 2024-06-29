@@ -36,4 +36,18 @@ export class InquiriesService {
       ${dto.createdAt}<br>
     `;
   }
+
+  public async getInquiries({
+    take = 100,
+    cursor,
+  }: {
+    take?: number;
+    cursor?: number;
+  }) {
+    return this.prismaService.inquiry.findMany({
+      orderBy: { id: 'desc' },
+      take,
+      ...(cursor && { cursor: { id: cursor }, skip: 1 }),
+    });
+  }
 }
