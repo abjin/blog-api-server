@@ -17,7 +17,7 @@ export class CreatePostRequestBodyDto {
   @ApiProperty({ description: '대표 이미지', required: false })
   @IsString()
   @IsOptional()
-  image: string;
+  image?: string;
 }
 
 export class GetPostsRequestQueryDto {
