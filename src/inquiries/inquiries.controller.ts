@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 import {
   GetInquiriesRequestQueryDto,
@@ -19,11 +28,18 @@ export class InquiriesController {
     return this.inquiriesService.createInquiry(dto);
   }
 
-  @ApiOperation({ summary: '문의 조회하기' })
+  @ApiOperation({ summary: '문의 조회' })
   @ApiQuery({ type: GetInquiriesRequestQueryDto })
   @UseGuards(AuthGuard('jwt'))
   @Get()
   getInquiries(@Query() dto: GetInquiriesRequestQueryDto) {
     return this.inquiriesService.getInquiries(dto);
+  }
+
+  @ApiOperation({ summary: '문의 단일 조회' })
+  @UseGuards(AuthGuard('jwt'))
+  @Get(':id')
+  getInquiry(@Param('id', ParseIntPipe) id: number) {
+    return this.inquiriesService.getInquiry(id);
   }
 }

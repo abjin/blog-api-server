@@ -52,4 +52,8 @@ export class InquiriesService {
       ...(cursor && { cursor: { id: cursor }, skip: 1 }),
     });
   }
+
+  public async getInquiry(id: number) {
+    return this.prismaService.inquiry.findUnique({ where: { id } });
+  }
 }
