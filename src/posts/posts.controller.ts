@@ -74,6 +74,7 @@ export class PostsController {
       categoryId: dto.categoryId,
       content: dto.content,
       title: dto.title,
+      image: dto.image,
     });
   }
 }
