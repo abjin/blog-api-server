@@ -35,5 +35,10 @@ async function bootstrap() {
 bootstrap().then(console.log).catch(console.log);
 
 function getOriginWhitelist(): string[] {
-  return ['https://localhost:5173', 'http://localhost:5173'];
+  return [
+    'https://localhost:5173',
+    'http://localhost:5173',
+    'https://kg-telecome.web.app',
+    'http://kg-telecome.web.app',
+  ];
 }
