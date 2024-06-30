@@ -40,5 +40,7 @@ function getOriginWhitelist(): string[] {
     'http://localhost:5173',
     'https://kg-telecome.web.app',
     'http://kg-telecome.web.app',
+    'https://kg-telecome.firebaseapp.com',
+    'http://kg-telecome.firebaseapp.com',
   ];
 }
