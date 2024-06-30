@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/db/prisma.service';
 import * as crypto from 'crypto';
 import { JwtService } from '@nestjs/jwt';
-import { Response } from 'express';
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()
@@ -39,9 +38,8 @@ export class AuthService {
     return hashedPassword !== localAccount.password ? null : localAccount;
   }
 
-  public async setWebToken(res: Response, username: string) {
-    const token = await this.jwtService.signAsync({ username });
-    res.cookie('token', token, this.cookieOption);
+  public async signJwtToken(username: string) {
+    return this.jwtService.signAsync({ username });
   }
 
   private hashPassword(password: string, salt: string) {

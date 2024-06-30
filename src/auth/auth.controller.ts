@@ -1,21 +1,12 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Post,
-  Req,
-  Res,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import {
   CreateAccountRequestBodyDto,
   LoginRequestBodyDto,
 } from './auth.request.dto';
 import { AuthGuard } from '@nestjs/passport';
-import { CreateAccountResponseDto } from './auth.response.dto';
-import { Request, Response } from 'express';
-import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Request } from 'express';
+import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('유저 인증')
 @Controller('auth')
@@ -31,15 +22,13 @@ export class AuthController {
 
   @ApiOperation({ summary: '회원 가입' })
   @ApiBody({ type: CreateAccountRequestBodyDto })
-  @ApiResponse({ type: CreateAccountResponseDto })
   @Post('accounts')
   async signUp(
     @Body() { username, password }: CreateAccountRequestBodyDto,
-    @Res({ passthrough: true }) res: Response,
-  ): Promise<CreateAccountResponseDto> {
-    const localAccount = await this.authService.signUp(username, password);
-    await this.authService.setWebToken(res, localAccount.username);
-    return new CreateAccountResponseDto(localAccount);
+  ): Promise<{ user: { username: string }; token: string }> {
+    await this.authService.signUp(username, password);
+    const token = await this.authService.signJwtToken(username);
+    return { user: { username }, token };
   }
 
   @ApiOperation({ summary: '로그인' })
@@ -48,9 +37,8 @@ export class AuthController {
   @Post('local-login')
   async postAdminLogin(
     @Req() req: Request & { user: any },
-    @Res({ passthrough: true }) res: Response,
-  ): Promise<{ user: { username: string } }> {
-    await this.authService.setWebToken(res, req.user.username);
-    return req.user;
+  ): Promise<{ user: { username: string }; token: string }> {
+    const token = await this.authService.signJwtToken(req.user.username);
+    return { user: req.user, token };
   }
 }

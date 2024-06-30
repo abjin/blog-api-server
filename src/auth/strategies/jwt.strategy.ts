@@ -8,7 +8,8 @@ import { Strategy } from 'passport-jwt';
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   constructor(private readonly configService: ConfigService) {
     super({
-      jwtFromRequest: (request: Request) => request?.cookies?.token,
+      jwtFromRequest: (request: Request) =>
+        request?.headers?.authorization?.replace('Bearer ', ''),
       secretOrKey: configService.getOrThrow('JWT_SECRET'),
     });
   }
