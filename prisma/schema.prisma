@@ -23,7 +23,7 @@ model Post {
   id         Int      @id @default(autoincrement())
   title      String
   image      String?
-  content    String
+  content    String   @db.Text
   createdAt  DateTime @default(now())
   categoryId String
   category   Category @relation(fields: [categoryId], references: [id])
