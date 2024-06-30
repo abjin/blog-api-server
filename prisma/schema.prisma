@@ -31,7 +31,7 @@ model Post {
 
 model LocalAccount {
   username String @unique
-  password String
+  password String @db.Text
   salt     String
 }
 
