@@ -44,3 +44,16 @@ model Inquiry {
   content   String
   createdAt DateTime
 }
+
+model Banner {
+  id       Int      @id @default(autoincrement())
+  imageUrl String
+  link     String
+  show     Boolean  @default(true)
+  order    Int      @default(0)
+  position Position
+}
+
+enum Position {
+  popup
+}
