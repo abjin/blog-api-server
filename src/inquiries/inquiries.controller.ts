@@ -8,7 +8,7 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import { ApiBody, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
 import {
   GetInquiriesRequestQueryDto,
   PostInquiryRequestDto,
@@ -29,7 +29,6 @@ export class InquiriesController {
   }
 
   @ApiOperation({ summary: '문의 조회' })
-  @ApiQuery({ type: GetInquiriesRequestQueryDto })
   @UseGuards(AuthGuard('jwt'))
   @Get()
   getInquiries(@Query() dto: GetInquiriesRequestQueryDto) {

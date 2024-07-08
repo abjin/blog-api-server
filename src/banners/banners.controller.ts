@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
-import { ApiBody, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { BannersService } from './banners.service';
 import {
   CreateBannerRequestBodyDto,
@@ -14,7 +14,6 @@ export class BannersController {
 
   @Get()
   @ApiOperation({ summary: '배너조회' })
-  @ApiQuery({ type: GetBannersRequestQueryDto })
   async getBanners(@Query() dto: GetBannersRequestQueryDto) {
     return this.bannersService.getBanners(dto.position);
   }

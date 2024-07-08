@@ -18,7 +18,7 @@ import {
   GetPostsSignedUrlRequestQueryDto,
 } from './posts.request.dto';
 import { AuthGuard } from '@nestjs/passport';
-import { ApiBody, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('게시물')
 @Controller('posts')
@@ -26,7 +26,6 @@ export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
   @ApiOperation({ summary: '게시물 signed url 조회' })
-  @ApiQuery({ type: GetPostsSignedUrlRequestQueryDto })
   @UseGuards(AuthGuard('jwt'))
   @Get('signed-url')
   getPostsSignedUrl(@Query() { fileName }: GetPostsSignedUrlRequestQueryDto) {
@@ -34,7 +33,6 @@ export class PostsController {
   }
 
   @ApiOperation({ summary: '게시판 게시물 조회' })
-  @ApiQuery({ type: GetPostsRequestQueryDto })
   @Get()
   getPosts(@Query() query: GetPostsRequestQueryDto) {
     return this.postsService.getPostsByCategory(query);
