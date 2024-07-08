@@ -8,6 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { InquiriesModule } from './inquiries/inquiries.module';
 import { AppCommand } from './app.command';
+import { BannersModule } from './banners/banners.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { AppCommand } from './app.command';
     PostsModule,
     AuthModule,
     InquiriesModule,
+    BannersModule,
   ],
   providers: [AppCommand],
   controllers: [AppController],
