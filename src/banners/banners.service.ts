@@ -12,7 +12,7 @@ const ONE_HOUR = 1000 * 60 * 60;
 export class BannersService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  private cachedBanners: CachedBanners;
+  private cachedBanners: CachedBanners | null;
   private cachedBannesrRefreshTime: number;
   private readonly cachedBannersMaxAge = ONE_HOUR;
 
@@ -38,7 +38,9 @@ export class BannersService {
     return this.cachedBanners;
   }
 
-  public createBanner(dto: CreateBannerRequestBodyDto) {
-    return this.prismaService.banner.create({ data: dto });
+  public async createBanner(dto: CreateBannerRequestBodyDto) {
+    const result = await this.prismaService.banner.create({ data: dto });
+    this.cachedBanners = null;
+    return result;
   }
 }
