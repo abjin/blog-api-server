@@ -38,9 +38,19 @@ export class BannersService {
     return this.cachedBanners;
   }
 
+  private refreshCachedBanners() {
+    this.cachedBanners = null;
+  }
+
   public async createBanner(dto: CreateBannerRequestBodyDto) {
     const result = await this.prismaService.banner.create({ data: dto });
-    this.cachedBanners = null;
+    this.refreshCachedBanners();
+    return result;
+  }
+
+  public async deleteBanner(id: number) {
+    const result = await this.prismaService.banner.delete({ where: { id } });
+    this.refreshCachedBanners();
     return result;
   }
 }

@@ -1,4 +1,14 @@
-import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { BannersService } from './banners.service';
 import {
@@ -24,5 +34,12 @@ export class BannersController {
   @ApiOperation({ summary: '배너생성' })
   async createBanner(@Body() dto: CreateBannerRequestBodyDto) {
     return this.bannersService.createBanner(dto);
+  }
+
+  @Delete(':id')
+  @UseGuards(AuthGuard('jwt'))
+  @ApiOperation({ summary: '배너삭제' })
+  async deleteBanner(@Param('id', ParseIntPipe) id: number) {
+    return this.bannersService.deleteBanner(id);
   }
 }
