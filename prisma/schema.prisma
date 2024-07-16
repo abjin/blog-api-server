@@ -56,4 +56,5 @@ model Banner {
 
 enum Position {
   popup
+  main
 }
