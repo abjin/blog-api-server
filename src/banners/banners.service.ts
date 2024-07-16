@@ -4,7 +4,7 @@ import { PrismaService } from 'src/db/prisma.service';
 import * as _ from 'lodash';
 import { CreateBannerRequestBodyDto } from './banners.request.dto';
 
-type CachedBanners = { [key in Position]: Banner[] };
+type CachedBanners = Partial<{ [key in Position]: Banner[] }>;
 
 const ONE_HOUR = 1000 * 60 * 60;
 
