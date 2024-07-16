@@ -13,6 +13,7 @@ import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { BannersService } from './banners.service';
 import {
   CreateBannerRequestBodyDto,
+  GetBannerSignedUrlRequestQueryDto,
   GetBannersRequestQueryDto,
 } from './banners.request.dto';
 import { AuthGuard } from '@nestjs/passport';
@@ -41,5 +42,12 @@ export class BannersController {
   @ApiOperation({ summary: '배너삭제' })
   async deleteBanner(@Param('id', ParseIntPipe) id: number) {
     return this.bannersService.deleteBanner(id);
+  }
+
+  @ApiOperation({ summary: '배너 signed url 조회' })
+  @UseGuards(AuthGuard('jwt'))
+  @Get('signed-url')
+  getPostsSignedUrl(@Query() { fileName }: GetBannerSignedUrlRequestQueryDto) {
+    return this.bannersService.getPostsSignedUrl(fileName);
   }
 }

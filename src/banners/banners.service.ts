@@ -3,6 +3,7 @@ import { Position, Banner } from '@prisma/client';
 import { PrismaService } from 'src/db/prisma.service';
 import * as _ from 'lodash';
 import { CreateBannerRequestBodyDto } from './banners.request.dto';
+import { GoogleCloudService } from '@libs/google-cloud';
 
 type CachedBanners = Partial<{ [key in Position]: Banner[] }>;
 
@@ -10,7 +11,10 @@ const ONE_HOUR = 1000 * 60 * 60;
 
 @Injectable()
 export class BannersService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly googleCloudService: GoogleCloudService,
+  ) {}
 
   private cachedBanners: CachedBanners | null;
   private cachedBannesrRefreshTime: number;
@@ -52,5 +56,14 @@ export class BannersService {
     const result = await this.prismaService.banner.delete({ where: { id } });
     this.refreshCachedBanners();
     return result;
+  }
+
+  public getPostsSignedUrl(fileName: string) {
+    const filePath = this.getBannerImageFilePath(fileName);
+    return this.googleCloudService.getSignedUrl(filePath);
+  }
+
+  private getBannerImageFilePath(fileName: string) {
+    return `banner/${fileName}`;
   }
 }

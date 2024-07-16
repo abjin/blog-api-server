@@ -5,6 +5,7 @@ import {
   IsEnum,
   IsNumber,
   IsOptional,
+  IsString,
   IsUrl,
 } from 'class-validator';
 
@@ -40,4 +41,10 @@ export class CreateBannerRequestBodyDto {
   @ApiProperty({ description: '노출 위치', type: String })
   @IsEnum(Position)
   position: Position;
+}
+
+export class GetBannerSignedUrlRequestQueryDto {
+  @ApiProperty({ description: '파일 이름' })
+  @IsString()
+  fileName: string;
 }
