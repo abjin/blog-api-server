@@ -1,0 +1,21 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Koyeb
+        env:
+          KOYEB_API_KEY: ${{ secrets.KOYEB_API_KEY }}
+        run: |
+          curl -X POST "https://app.koyeb.com/v1/services/b8a94a07-ae94-4d8c-927b-428df8ae96af/redeploy" \
+            -H "Authorization: Bearer $KOYEB_API_KEY"
