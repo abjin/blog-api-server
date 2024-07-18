@@ -35,7 +35,7 @@ export class InquiriesService {
       ${dto.content}
       <br><br>
       <h3>문의 날짜</h3>
-      ${inquiryTime}<br>
+      ${inquiryTime.toString()}<br>
     `;
   }
 
