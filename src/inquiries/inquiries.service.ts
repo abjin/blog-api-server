@@ -22,6 +22,8 @@ export class InquiriesService {
   }
 
   private createInquiryHtmlFromJson(dto: PostInquiryRequestDto): string {
+    const inquiryTime = new Date(dto.createdAt);
+    inquiryTime.setHours(inquiryTime.getHours() + 9);
     return `
       <h2>고객 정보</h2>
       작성자 이름: ${dto.name}<br>
@@ -33,7 +35,7 @@ export class InquiriesService {
       ${dto.content}
       <br><br>
       <h3>문의 날짜</h3>
-      ${dto.createdAt.toLocaleString('ko-KR')}<br>
+      ${inquiryTime.toISOString()}<br>
     `;
   }
 
