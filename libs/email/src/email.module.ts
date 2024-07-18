@@ -11,14 +11,16 @@ import { name as packageName } from '../../../package.json';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         transport: {
-          host: 'smtp.gmail.com',
+          host: 'smtp.naver.com',
           port: 587,
           auth: {
-            user: configService.get('GMAIL_USERNAME'),
-            pass: configService.get('GMAIL_PASSWORD'),
+            user: configService.get('MAIL_USERNAME'),
+            pass: configService.get('MAIL_PASSWORD'),
           },
         },
-        defaults: { from: `"${packageName}" <${packageName}@gmail.com>` },
+        defaults: {
+          from: `"${packageName}" <${configService.get('MAIL_USERNAME')}>`,
+        },
         template: {
           dir: __dirname + '/templates',
           adapter: new HandlebarsAdapter(),
