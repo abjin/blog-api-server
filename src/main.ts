@@ -20,8 +20,7 @@ async function bootstrap() {
   );
   app.enableShutdownHooks();
   configService.getOrThrow('NODE_ENV') !== 'production' && useSwagger(app);
-
-  const origins: string[] = getOriginWhitelist();
+  const origins = configService.getOrThrow('CORS_WHITE_LIST').split(',');
   app.enableCors({
     origin: origins,
     credentials: true,
@@ -33,14 +32,3 @@ async function bootstrap() {
   return { port, data: new Date() };
 }
 bootstrap().then(console.log).catch(console.log);
-
-function getOriginWhitelist(): string[] {
-  return [
-    'https://localhost:5173',
-    'http://localhost:5173',
-    'https://kg-telecome.web.app',
-    'http://kg-telecome.web.app',
-    'https://kg-telecome.firebaseapp.com',
-    'http://kg-telecome.firebaseapp.com',
-  ];
-}
