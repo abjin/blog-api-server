@@ -12,10 +12,6 @@ export class AuthService {
     private readonly prismaService: PrismaService,
   ) {}
 
-  private readonly cookieOption = {
-    domain: this.configService.getOrThrow('COOKIE_DOMAIN'),
-  };
-
   public async signUp(username: string, password: string) {
     const salt = crypto.randomBytes(16).toString('hex');
     const hashedPassword = await this.hashPassword(password, salt);
