@@ -9,9 +9,11 @@ import { AuthModule } from './auth/auth.module';
 import { InquiriesModule } from './inquiries/inquiries.module';
 import { AppCommand } from './app.command';
 import { BannersModule } from './banners/banners.module';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
+    { ...HttpModule.register({}), global: true },
     ConfigModule.forRoot({ isGlobal: true }),
     CommandModule,
     CategoriesModule,
