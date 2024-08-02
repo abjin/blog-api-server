@@ -10,10 +10,12 @@ import { InquiriesModule } from './inquiries/inquiries.module';
 import { AppCommand } from './app.command';
 import { BannersModule } from './banners/banners.module';
 import { HttpModule } from '@nestjs/axios';
+import { CacheModule } from '@nestjs/cache-manager';
 
 @Module({
   imports: [
     { ...HttpModule.register({}), global: true },
+    CacheModule.register({ isGlobal: true }),
     ConfigModule.forRoot({ isGlobal: true }),
     CommandModule,
     CategoriesModule,
