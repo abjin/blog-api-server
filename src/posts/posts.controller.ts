@@ -9,6 +9,7 @@ import {
   Post,
   Query,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import {
@@ -19,8 +20,12 @@ import {
 } from './posts.request.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { CacheKey, CacheTTL } from '@nestjs/cache-manager';
+import { HttpCacheInterceptor } from 'src/http-cache.interceptor';
+import { InmemoryCacheKeys } from 'src/constants';
 
 @ApiTags('게시물')
+@UseInterceptors(HttpCacheInterceptor)
 @Controller('posts')
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}
@@ -33,6 +38,8 @@ export class PostsController {
   }
 
   @ApiOperation({ summary: '게시판 게시물 조회' })
+  @CacheKey(InmemoryCacheKeys.GetPosts)
+  @CacheTTL(1000 * 60)
   @Get()
   getPosts(@Query() query: GetPostsRequestQueryDto) {
     return this.postsService.getPostsByCategory(query);
