@@ -16,7 +16,8 @@
     "deploy": "npx nestjs-command deploy",
     "command": "npx nestjs-command",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "prisma:generate": "npx prisma generate"
+    "prisma:generate": "npx prisma generate",
+    "prisma:seed": "npx prisma db seed"
   },
   "dependencies": {
     "@google-cloud/storage": "^7.11.2",
@@ -98,5 +99,8 @@
       "^@libs/email(|/.*)$": "<rootDir>/libs/email/src/$1",
       "^@libs/google-cloud(|/.*)$": "<rootDir>/libs/google-cloud/src/$1"
     }
+  },
+  "prisma": {
+    "seed": "ts-node ./prisma/seed.ts"
   }
 }
