@@ -1,0 +1,53 @@
+version: '3.3'
+name: blog-api-server
+
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    hostname: localhost
+    ports:
+      - '3309:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: '0000'
+      MYSQL_DATABASE: blog
+      MYSQL_USER: blog
+      MYSQL_PASSWORD: '0000'
+    networks:
+      - database-network
+  api-server:
+    image: abjin/blog-api-server:0.0.1
+    container_name: api-server
+    ports:
+      - '3000:3000'
+    networks:
+      - database-network
+      - api-network
+    depends_on:
+      - mysql
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - CORS_WHITE_LIST=${CORS_WHITE_LIST}
+      - JWT_SECRET=${JWT_SECRET}
+      - GOOGLE_PRIVATE_KEY=${GOOGLE_PRIVATE_KEY}
+      - GOOGLE_PROJECT_ID=${GOOGLE_PRIVATE_KEY}
+      - GOOGLE_CLIENT_EMAIL=${GOOGLE_CLIENT_EMAIL}
+      - GOOGLE_BUCKET_NAME=${GOOGLE_BUCKET_NAME}
+      - MAIL_USERNAME=${MAIL_USERNAME}
+      - MAIL_PASSWORD=${MAIL_PASSWORD}
+      - INQUIRY_MAIL_RECEIVER=${INQUIRY_MAIL_RECEIVER}
+      - DATABASE_URL=${DATABASE_URL}
+      - SWAGGER_USERNAME=${SWAGGER_USERNAME}
+      - SWAGGER_PASSWORD=${SWAGGER_PASSWORD}
+  client:
+    image: abjin/blog-client:0.0.1
+    container_name: client
+    ports:
+      - '5173:5173'
+    depends_on:
+      - api-server
+    networks:
+      - api-network
+networks:
+  database-network:
+  api-network:
